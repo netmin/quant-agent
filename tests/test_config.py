@@ -61,3 +61,4 @@ def test_invalid_config_raises():
     }
     with pytest.raises(ValidationError):
         Config.model_validate(broken)
+
