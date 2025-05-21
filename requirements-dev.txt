@@ -1,5 +1,6 @@
 black
 isort
-flake8
+ruff
+detect-secrets
 pre-commit
 pytest

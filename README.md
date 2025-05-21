@@ -114,7 +114,7 @@ Adjust limits to fit your hardware.
 ## Development Workflow
 
 1. **Fork → branch → PR** model. Create a feature branch from `main`.
-2. Activate pre‑commit hooks: `pre-commit install`. They run Black, isort, flake8, detect‑secrets.
+2. Activate pre‑commit hooks: `pre-commit install`. They run Black, isort, ruff, detect‑secrets.
 3. Run tests: `pytest`.
 4. Build & run containers locally (`docker compose …`).
 5. Push and open a Pull Request; CI must be green.
@@ -126,7 +126,7 @@ Adjust limits to fit your hardware.
 | ------------------------ | ------------------------------------------ |
 | **Black**                | code formatter                             |
 | **isort**                | import ordering                            |
-| **flake8**               | static analysis                            |
+| **ruff**                 | static analysis                            |
 | **pytest**               | testing                                    |
 | **pre‑commit**           | unified git hooks                          |
 | **Conventional Commits** | commit message style (`feat: …`, `fix: …`) |
