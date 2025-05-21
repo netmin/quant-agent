@@ -41,7 +41,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
         polars==1.29.* \
         qdrant-client==1.14.* \
         'httpx[http2]>=0.28,<1.0' \
-        pydantic==2.*
+        pydantic==2.* \
+        'ccxt[pro]'
 
 # ---------------------------------------------------------------------------
 # 4. Workdir & permissions
