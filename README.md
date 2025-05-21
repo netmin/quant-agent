@@ -2,8 +2,7 @@
 
 ***Multi‑agent AI sandbox for generating and back‑testing trading strategies***
 
-![CI](https://img.shields.io/github/actions/workflow/status/your‑org/quant‑agent‑platform/ci.yml?branch=main)
-![License](https://img.shields.io/github/license/your‑org/quant‑agent‑platform)
+<!-- CI and license badges will be added once the repository is public -->
 
 > **Status – Sprint 0 (bootstrapping)**
 
@@ -58,38 +57,36 @@ Quant Agent Platform (QAP) is an open‑source project that aims to evolve fro
 
 ### Prerequisites
 
-* Docker 24+ and Docker Compose plugin.
-* Linux/macOS/WSL2 (x86‑64).
+* Docker 24+ with the Compose plugin.
+* Linux/macOS/WSL2 (x86‑64) host.
 
 ```bash
 # 1. Clone the repo
-$ git clone https://github.com/your‑org/quant‑agent‑platform.git
-$ cd quant‑agent‑platform
+$ git clone https://github.com/your-org/quant-agent-platform.git
+$ cd quant-agent-platform
 
-# 2. Fill environment variables
-$ cp .env.example .env && $EDITOR .env
+# 2. Create an empty .env file (required by Compose)
+$ touch .env
 
-# 3. Build & run
-$ docker compose -f docker/docker-compose.dev.yml up --build
+# 3. Build and start the stack
+$ docker compose -f docker/docker-compose.yml up --build
 ```
 
 After start‑up:
 
-* `app` container opens a Python REPL (`docker compose exec app python`) where `duckdb.connect()` works.
+* Open a Python REPL inside the running container:
+  `docker compose exec app python`.
+* `duckdb.connect()` works out of the box.
 * Qdrant is reachable at `http://localhost:6333`.
 
 ## Directory Layout
 
 ```
-app/            # application source code
-configs/        # config.yml + Pydantic schema
-scripts/        # utility scripts (ETL, tests)
-notebooks/      # research notebooks (ignored in CI)
- docker/
-     Dockerfile
-     docker-compose.dev.yml
- tests/
- data/          # mounted volume, excluded from Git
+app/         # application source code
+configs/     # YAML configs and schema
+docker/      # Dockerfile and compose stack
+tests/       # pytest suites
+requirements-dev.txt  # dev tooling
 ```
 
 ## Configuration
@@ -119,6 +116,15 @@ Adjust limits to fit your hardware.
 4. Build & run containers locally (`docker compose …`).
 5. Push and open a Pull Request; CI must be green.
 6. At least one review approval is required before merge.
+
+## Updating Dependencies
+
+Runtime libraries live in `docker/Dockerfile` while developer tooling lives in
+`requirements-dev.txt`. After editing either file rebuild the containers:
+
+```bash
+$ docker compose build --no-cache
+```
 
 ## Code Style & Tooling
 
