@@ -1,0 +1,12 @@
+# Trading-platform sandbox & metric limits
+sandbox:
+  cpu_limit: 1          # cores (int > 0)
+  memory_limit_mb: 2048 # RAM in MB (int >= 256)
+  disk_limit_mb: 50     # Disk quota in MB (int >= 50)
+  network: false        # Disable outbound network inside strategy sandbox
+
+metrics:
+  sharpe_min: 1.5
+  sortino_min: 2.0
+  calmar_min: 0.5
+  psr_min: 0.55

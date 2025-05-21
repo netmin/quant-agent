@@ -1,0 +1,39 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Quant Agent Platform – config schema
+type: object
+required: [sandbox, metrics]
+
+properties:
+  sandbox:
+    type: object
+    required: [cpu_limit, memory_limit_mb, disk_limit_mb, network]
+    properties:
+      cpu_limit:
+        type: integer
+        minimum: 1
+        maximum: 8
+      memory_limit_mb:
+        type: integer
+        minimum: 256
+      disk_limit_mb:
+        type: integer
+        minimum: 50
+      network:
+        type: boolean
+
+  metrics:
+    type: object
+    required: [sharpe_min, sortino_min, calmar_min, psr_min]
+    properties:
+      sharpe_min:
+        type: number
+        minimum: 0
+      sortino_min:
+        type: number
+        minimum: 0
+      calmar_min:
+        type: number
+        minimum: 0
+      psr_min:
+        type: number
+        minimum: 0
