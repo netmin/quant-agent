@@ -22,9 +22,16 @@ class MetricsCfg(BaseModel):
     psr_min: float = Field(gt=0)
 
 
+class ExchangeCfg(BaseModel):
+    id: str
+    rate_limit: int = Field(gt=0)
+    enable_spot: bool
+
+
 class Config(BaseModel):
     sandbox: SandboxCfg
     metrics: MetricsCfg
+    exchanges: list[ExchangeCfg]
 
 
 # ---------- Helpers ----------
@@ -52,12 +59,14 @@ def test_valid_config():
     assert cfg.metrics.sharpe_min >= 1.0
     assert cfg.metrics.sortino_min >= 1.0
     assert cfg.sandbox.cpu_limit <= 2
+    assert any(ex.id == "binance" for ex in cfg.exchanges)
 
 
 def test_invalid_config_raises():
     broken = {
         "sandbox": {"cpu_limit": 0, "memory_limit_mb": 128, "disk_limit_mb": 10, "network": False},
         "metrics": {"sharpe_min": -1, "sortino_min": 0, "calmar_min": 0, "psr_min": 0},
+        "exchanges": [{"id": "binance", "rate_limit": -1, "enable_spot": True}],
     }
     with pytest.raises(ValidationError):
         Config.model_validate(broken)
