@@ -1,6 +1,3 @@
-black
-isort
 ruff
-detect-secrets
 pre-commit
 pytest
